@@ -1,0 +1,128 @@
+-- Original Game Data
+Game	Quarter	Minutes	Seconds	Offense	Defense	Down	Yards to Go	Yard Line	Score Difference	Series 1st Down	Play Desc	Score Change	Next Score	Offense Team Wins	Offense Total Score	Defense Total Score	Season
+
+-- Parsed Out Game Data
+QB	Offensive Player	Defensive Player 1	Defensive Player 2	Penalty	Fumble	Incomplete	Is Goal Good	Play Type	Home Team	Away Team	Date	Winner
+
+Game (String) - Game Id
+Quarter (Int) - Game Quarter
+GameMinutes (Int) - Game time countdown left in minutes
+GameSeconds (Int) - Game time countdown left in seconds
+Offense (String) - Team on offense
+Defense (String) - Team on defense
+Down (Int) - Down number
+YardsToGo (Int) - Number of yards for a first down
+YardLine (Int) - Yard line where the ball is
+PlayDesc (String) - The original description of the play
+OffenseScore (Int) - The offense's score as of the current play
+DefenseScore (Int) - The defense's score as of the current play
+Year (Int) - The year of the season
+QB (String) - The QB/Punter/Kicker in a play
+OffensivePlayer (String) - The receiver or runner
+DefensivePlayer1 (String) - The name of the defensive player on the play
+DefensivePlayer2 (String) - The name of the other defensive player on the play
+Penalty (boolean) - Whether or not there was a penalty on the play
+Fumble (boolean) - Whether or not there was a fumble on the play
+Incomplete (boolean) - Whether or not there was an incomplete pass on the play
+IsGoalGood (boolean) - For a extra point or field goal kick, whether or not there it was good
+PlayType (Possible Values:PASS,INTERCEPTION,PASS,PUNT,RUN,KICKOFF,SPIKE,FIELDGOAL,EXTRAPOINT,SACK,KNEEL,REVIEW,SCRAMBLE,END) - The type of play that was run
+HomeTeam (String) - The name of the home team
+AwayTeam (String) - The name of the away team
+DatePlayed (String) - The data of the game
+Winner (String) - The name of the team that eventually wins
+HomeTeamScore (int) - The home teams score at the end of the game
+AwayTeamScore (int) - The away teams score at the end of the game
+
+-- Stadium Data
+Stadium	Capacity	Standing Room/Expanded seats	Location	Playing surface	Is Artificial Turf	Team	Opened	Weather Station	Roof Type
+
+Stadium (String) - The name of the stadium
+Capacity (Int) - The capacity of the stadium
+ExpandedCapacity (Int) - The expanded capacity of the stadium
+Location (String) - The location of the stadium
+PlayingSurface (String) - The type of grass, etc that the stadium has
+IsArtificial (Boolean) - Is the playing surface artificial
+Team (String) - The name of the team that plays at the stadium
+Opened (Int) - The year the stadium opened
+WeatherStation (String) - The name of the weather station closest to the stadium
+RoofType (Possible Values:None,Retractable,Dome) - The type of roof in the stadium
+Elevation - The elevation of the stadium
+
+-- Weather Data
+STATION	STATION_NAME	DATE	MDPR	MDSF	DAPR	PRCP	SNWD	SNOW	PSUN	TSUN	TMAX	TMIN	TOBS	WESD	WESF	AWND	WDF2	WDF5	WDFG	WSF2	WSF5	WSFG	PGTM	FMTM	WV07	WV01	WV20	WV03	WT09	WT14	WT07	WT01	WT15	WT17	WT06	WT21	WT05	WT02	WT11	WT22	WT04	WT13	WT16	WT08	WT18	WT03	WT10	WT19
+
+STATION STRING COMMENT 'Station identifier',
+STATION_NAME STRING COMMENT 'Station location name',
+READINGDATE STRING COMMENT 'Date of reading',
+MDPR INT COMMENT 'Multiday precipitation total (tenths of mm use with DAPR and DWPR, if available)',
+MDSF INT COMMENT 'Multiday snowfall total ',
+DAPR INT COMMENT 'Number of days included in the multiday precipitation total (MDPR)',
+PRCP INT COMMENT 'Precipitation (tenths of mm)',
+SNWD INT COMMENT 'Snow depth (mm)',
+SNOW INT COMMENT 'Snowfall (mm)',
+PSUN INT COMMENT 'Daily percent of possible sunshine (percent)',
+TSUN INT COMMENT 'Daily total sunshine (minutes)',
+TMAX INT COMMENT 'Maximum temperature (tenths of degrees C)',
+TMIN INT COMMENT 'Minimum temperature (tenths of degrees C)',
+TOBS INT COMMENT 'Temperature at the time of observation (tenths of degrees C)',
+WESD INT COMMENT 'Water equivalent of snow on the ground (tenths of mm)',
+WESF INT COMMENT 'Water equivalent of snowfall (tenths of mm)',
+AWND INT COMMENT 'Average daily wind speed (tenths of meters per second)',
+WDF2 INT COMMENT 'Direction of fastest 2-minute wind (degrees)',
+WDF5 INT COMMENT 'Direction of fastest 5-second wind (degrees)',
+WDFG INT COMMENT 'Direction of peak wind gust (degrees)',
+WSF2 INT COMMENT 'Fastest 2-minute wind speed (tenths of meters per second)',
+WSF5 INT COMMENT 'Fastest 5-second wind speed (tenths of meters per second)',
+WSFG INT COMMENT 'Peak guest wind speed (tenths of meters per second)',
+PGTM INT COMMENT 'Peak gust time (hours and minutes, i.e., HHMM)',
+FMTM INT COMMENT 'Time of fastest mile or fastest 1-minute wind (hours and minutes, i.e, HHMM)',
+WV07 INT COMMENT 'Ash, dust, sand, or other blowing obstruction',
+WV01 INT COMMENT 'Fog, ice fog, or freezing fog (may include heavy fog)',
+WV20 INT COMMENT 'Rain or snow shower',
+WV03 INT COMMENT 'Thunder',
+WT09 INT COMMENT 'Blowing or drifting snow',
+WT14 INT COMMENT 'Drizzle',
+WT07 INT COMMENT 'Dust, volcanic ash, blowing dust, blowing sand, or blowing obstruction',
+WT01 INT COMMENT 'Fog, ice fog, or freezing fog (may include heavy fog)',
+WT15 INT COMMENT 'Freezing drizzle ',
+WT17 INT COMMENT 'Freezing rain ',
+WT06 INT COMMENT 'Glaze or rime ',
+WT21 INT COMMENT 'Ground fog ',
+WT05 INT COMMENT 'Hail (may include small hail)',
+WT02 INT COMMENT 'Heavy fog or heaving freezing fog (not always distinguished from fog)',
+WT11 INT COMMENT 'High or damaging winds',
+WT22 INT COMMENT 'Ice fog or freezing fog',
+WT04 INT COMMENT 'Ice pellets, sleet, snow pellets, or small hail',
+WT13 INT COMMENT 'Mist',
+WT16 INT COMMENT 'Rain (may include freezing rain, drizzle, and freezing drizzle)',
+WT08 INT COMMENT 'Smoke or haze ',
+WT18 INT COMMENT 'Snow, snow pellets, snow grains, or ice crystals',
+WT03 INT COMMENT 'Thunder',
+WT10 INT COMMENT 'Tornado, waterspout, or funnel cloud',
+WT19 INT COMMENT 'Unknown source of precipitation '
+
+(-9999) means none 
+
+hasWeatherInVicinity - One of the WV's is not "-9999":
+hasWeatherType - One of the WT's is not "-9999":
+hasWeather - One of the WV's or WT's is not "-9999":
+
+-- Arrest Data
+Season	Team	Player
+
+-- Parsed Out Arrest Data
+PlayerArrested	DefensePlayerArrested	OffensePlayerArrested
+
+Season (Int) - Player Arrested in (February to February)
+Team (String) - Team person played on
+Player (String) - Name of player Arrested
+PlayerArrested (Boolean) - Was a player in the play arrested that season
+OffensePlayerArrested (Boolean) - Offense had player arrested in season
+DefensePlayerArrested (Boolean) - Defense had player arrested in season
+HomeTeamPlayerArrested (Boolean) - Offense had player arrested in season
+AwayTeamPlayerArrested (Boolean) - Defense had player arrested in season
+
+
+Plays lacking weather data - 25,227
+Plays with weather data - 446,339
+471392
