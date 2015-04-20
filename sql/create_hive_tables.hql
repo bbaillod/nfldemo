@@ -116,3 +116,31 @@ ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
 LOCATION "/user/cloudera/weather_csv_files";
+
+drop table if exists arrests;
+create external table arrests (
+year int,
+team string,
+player string
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+LOCATION "/user/cloudera/arrest_csv_files";
+
+drop table if exists arrest_detail;
+create external table arrest_detail (
+arrest_date string,
+arrest_year int,
+team string,
+player string,
+position string, 
+event string,
+charge string,
+charge_details string,
+resolution string
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+LOCATION "/user/cloudera/arrest_detail_csv_files";
