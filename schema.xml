@@ -60,35 +60,61 @@
      -->
 
  <fields>
-	<!--<field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false" />
-       -->
-	<field name="text" type="text_general" indexed="true" stored="false" multiValued="true"/>
-	<field name="game" type="string" indexed="true" stored="true"/>
-       <field name="quarter" type="int" indexed="true" stored="true"/>
-       <field name="offense" type="string" indexed="true" stored="true" /> 
-       <field name="defense" type="string" indexed="true" stored="true" /> 
-       <field name="down" type="string" indexed="true" stored="true" />
-       <field name="playdesc" type="string" indexed="true" stored="true" />
-	<field name="defensiveplayer1" type="string" indexed="true" stored="true" />
-	<field name="defensiveplayer2" type="string" indexed="true" stored="true" />
-	<field name="offensiveplayer" type="string" indexed="true" stored="true" />
-	<field name="defenseplayer" type="string" indexed="true" stored="true" multiValued="true" />
-	<field name="playtype" type="string" indexed="true" stored="true" />
-       <field name="year" type="int" indexed="true" stored="true" />
-	<field name="capacity" type="long" indexed="true" stored="true" />
+     <!--<field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false" />
+        -->
+     <field name="text" type="text_general" indexed="true" stored="false" multiValued="true"/>
+     <field name="game" type="string" indexed="true" stored="true"/>
+     <field name="quarter" type="int" indexed="true" stored="true"/>
+     <field name="offense" type="string" indexed="true" stored="true" />
+     <field name="defense" type="string" indexed="true" stored="true" />
+     <field name="down" type="int" indexed="true" stored="true" />
+     <field name="playdesc" type="string" indexed="true" stored="true" />
+     <field name="defensiveplayer1" type="string" indexed="true" stored="true" />
+     <field name="defensiveplayer2" type="string" indexed="true" stored="true" />
+     <field name="offensiveplayer" type="string" indexed="true" stored="true" default="" />
+     <field name="defenseplayer" type="string" indexed="true" stored="true" multiValued="true" />
+     <field name="playtype" type="string" indexed="true" stored="true" />
+     <field name="year" type="int" indexed="true" stored="true" />
+     <field name="capacity" type="long" indexed="true" stored="true" />
 
-	<field name="elevation" type="int" indexed="true" stored="true" />
-	<field name="stadiumlocation" type="string" indexed="true" stored="true" />
-	<field name="tmax" type="string" indexed="true" stored="true" />
-	<field name="qb" type="string" indexed="true" stored="true" />
-	<field name="playingsurface" type="string" indexed="true" stored="true" />
-	<field name="fumble" type="boolean" indexed="true" stored="true" />
-	<field name="driveresult" type="string" indexed="true" stored="true" />
-	<field name="gameminutes" type="int" indexed="true" stored="true" />
-       <field name="_version_" type="long" indexed="true" stored="true"/> 
-    </fields>
+     <field name="elevation" type="int" indexed="true" stored="true" />
+     <field name="stadiumlocation" type="string" indexed="true" stored="true" />
+     <field name="tmax" type="string" indexed="true" stored="true" />
+     <field name="qb" type="string" indexed="true" stored="true" default="N/A"/>
+     <field name="playingsurface" type="string" indexed="true" stored="true" />
+     <field name="fumble" type="boolean" indexed="true" stored="true" />
+     <field name="driveresult" type="string" indexed="true" stored="true" />
+     <field name="gameminutes" type="int" indexed="true" stored="true" />
+
+     <field name="gameseconds" type="int" indexed="true" stored="true"/>
+     <field name="yardline" type="int" indexed="true" stored="true" default="-1" />
+     <field name="offensescore" type="int" indexed="true" stored="true"/>
+     <field name="defensescore" type="int" indexed="true" stored="true"/>
+     <field name="hometeamscore" type="int" indexed="true" stored="true"/>
+     <field name="awayteamscore" type="int" indexed="true" stored="true"/>
+
+
+     <field name="penalty" type="boolean" indexed="true" stored="true"/>
+     <field name="incomplete" type="boolean" indexed="true" stored="true"/>
+     <field name="isgoalgood" type="boolean" indexed="true" stored="true"/>
+     <field name="playerarrested" type="boolean" indexed="true" stored="true"/>
+     <field name="offenseplayerarrested" type="boolean" indexed="true" stored="true"/>
+     <field name="defenseplayerarrested" type="boolean" indexed="true" stored="true"/>
+     <field name="hometeamplayerarrested" type="boolean" indexed="true" stored="true"/>
+     <field name="awayteamplayerarrested" type="boolean" indexed="true" stored="true"/>
+     <field name="isartificial" type="boolean" indexed="true" stored="true"/>
+
+     <field name="hometeam" type="string" indexed="true" stored="true" />
+     <field name="awayteam" type="string" indexed="true" stored="true" />
+     <field name="dateplayed" type="date" indexed="true" stored="true" />
+     <field name="winner" type="string" indexed="true" stored="true" />
+     <field name="team" type="string" indexed="true" stored="true" />
+     <field name="rooftype" type="string" indexed="true" stored="true" />
+
+     <field name="_version_" type="long" indexed="true" stored="true"/>
+ </fields>
    <uniqueKey required="False">playdesc</uniqueKey>  
- 	<copyField source="playdesc" dest="text"/>
+    <copyField source="playdesc" dest="text"/>
     <copyField source="defensiveplayer1" dest="defenseplayer"/>
     <copyField source="defensiveplayer2" dest="defenseplayer"/> 
 
@@ -111,7 +137,7 @@
   required or optional, assuming the clause isn't already marked by some operator.
   The default is OR, which is generally assumed so it is not a good idea to change it
   globally here.  The "q.op" request parameter takes precedence over this.
- <solrQueryParser defaultOperator="OR"/> -->
+ <solrQueryParser defaultOperator="AND"/> -->
 
   <!-- copyField commands copy one field to another at the time a document
         is added to the index.  It's used either to index the same field differently,
