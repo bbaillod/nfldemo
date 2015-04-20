@@ -22,6 +22,7 @@ hadoop fs -put -f nfl_play_csv_files $BASEDIR/
 hadoop fs -put -f weather_csv_files $BASEDIR/
 hadoop fs -put -f stadium_csv_files $BASEDIR/
 hadoop fs -put -f arrest_csv_files  $BASEDIR/
+hadoop fs -put -f arrests.csv       $BASEDIR/
 
 echo "Running PlaybyPlay Parser MapReduce Job to read the nfl_play_csv_files and create the parsed_plays output file"
 echo " "
