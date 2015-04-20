@@ -29,7 +29,7 @@ hadoop jar playbyplay.jar PlayByPlayDriver $BASEDIR/nfl_play_csv_files $BASEDIR/
 
 echo "Running Arrest Joiner MapReduce Job to create playbyplay_arrests file"
 echo " "
-hadoop jar playbyplay.jar ArrestJoinDriver $BASEDIR/parsed_plays $BASEDIR/playbyplay_arrests $BASEDIR/arrests.csv
+hadoop jar playbyplay.jar ArrestJoinDriver $BASEDIR/parsed_plays $BASEDIR/playbyplay_arrests $BASEDIR/arrest_csv_files/arrests.csv
 
 echo "Creating Hive Tables"
 echo " "
