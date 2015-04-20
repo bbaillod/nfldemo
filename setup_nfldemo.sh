@@ -3,6 +3,7 @@
 BASEDIR=/user/cloudera
 
 echo "Compiling NFL PlaybyPlay Parser Java MapReduce Program"
+echo " "
 cd src
 javac -classpath `hadoop classpath` *.java
 jar cf ../playbyplay.jar *.class
@@ -32,15 +33,17 @@ echo "Running Arrest Joiner MapReduce Job to create playbyplay_arrests file"
 echo " "
 hadoop jar playbyplay.jar ArrestJoinDriver $BASEDIR/parsed_plays $BASEDIR/playbyplay_arrests $BASEDIR/arrests.csv
 
+
 echo "Creating Hive Tables"
 echo " "
-hive -S -f ./sql/create_hive_tables.hql
+cd sql
+hive -S -f create_hive_tables.hql
 
 echo "Join Weather Data to playbyplay_arrests to create playbyplay_weather"
 echo " "
 hive -S -f ./sql/weather_join.hql
 
-echo "Sessionize drives (Play 3 of 9) to create playbyplay_drives"
+echo "Sessionize drives to create playbyplay_drives i.e. play 3 of 9"
 echo " "
 hive -S -f ./sql/sessionize_drives.hql
 
@@ -51,4 +54,4 @@ hive -S -f ./sql/result_of_drive.hql
 echo "All done with NFL Demo data creation"
 echo ""
 echo ""
-echo "** There are some sample SQL and PIG queries in queries.hql and queries.pig **"
+echo "** There are some sample SQL and PIG queries in these files: queries.hql and queries.pig **"
