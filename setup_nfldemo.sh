@@ -19,9 +19,9 @@ hadoop fs -rm -r $BASEDIR/stadium_csv_files
 echo "Putting Play, Weather, Stadium, and arrest files into HDFS"
 echo " "
 hadoop fs -put -f nfl_play_csv_files $BASEDIR/
-hadoop fs -put -f /weather_csv_files/weather.csv $BASEDIR/
-hadoop fs -put -f /stadium_csv_files/stadiums.csv $BASEDIR/
-hadoop fs -put -f /arrest_csv_files/arrests.csv $BASEDIR/
+hadoop fs -put -f weather_csv_files $BASEDIR/
+hadoop fs -put -f stadium_csv_files $BASEDIR/
+hadoop fs -put -f arrest_csv_files  $BASEDIR/
 
 echo "Running PlaybyPlay Parser MapReduce Job to create the parsed_plays file"
 echo " "
