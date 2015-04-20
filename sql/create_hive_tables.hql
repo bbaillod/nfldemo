@@ -38,7 +38,7 @@ CREATE EXTERNAL TABLE playbyplay_arrests (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\t'
 STORED AS TEXTFILE
-LOCATION "/user/cloudera/joinedoutput";
+LOCATION "/user/cloudera/playbyplay_arrests";
 
 drop table if exists stadium;
 CREATE EXTERNAL TABLE stadium (
@@ -57,7 +57,7 @@ CREATE EXTERNAL TABLE stadium (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
-LOCATION "/user/cloudera/stadium";
+LOCATION "/user/cloudera/stadium_csv_files";
 
 
 drop table if exists weather;
@@ -115,4 +115,4 @@ CREATE EXTERNAL TABLE weather (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
-LOCATION "/user/cloudera/weather";
+LOCATION "/user/cloudera/weather_csv_files";

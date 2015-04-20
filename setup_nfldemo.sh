@@ -10,11 +10,11 @@ cd ..
 
 echo "Deleting files in HDFS, disregard error if they are not there already"
 echo " "
-hadoop fs -rm -r $BASEDIR/input
-hadoop fs -rm -r $BASEDIR/playoutput
-hadoop fs -rm -r $BASEDIR/joinedoutput
-hadoop fs -rm -r $BASEDIR/weather
-hadoop fs -rm -r $BASEDIR/stadium
+hadoop fs -rm -r $BASEDIR/nfl_play_csv_files
+hadoop fs -rm -r $BASEDIR/parsed_plays
+hadoop fs -rm -r $BASEDIR/playbyplay_arrests
+hadoop fs -rm -r $BASEDIR/weather_csv_files
+hadoop fs -rm -r $BASEDIR/stadium_csv_files
 
 echo "Putting Play, Weather, Stadium, and arrest files into HDFS"
 echo " "
@@ -25,31 +25,31 @@ hadoop fs -mkdir $BASEDIR/stadium_csv_files
 hadoop fs -put -f /stadium_csv_files/stadiums.csv $BASEDIR/stadium_csv_files/
 hadoop fs -put -f /arrest_csv_files/arrests.csv $BASEDIR/arrest_csv_files/arrests.csv 
 
-echo "Running PlaybyPlay Parser MapReduce Job"
+echo "Running PlaybyPlay Parser MapReduce Job to create the parsed_plays file"
 echo " "
-hadoop jar playbyplay.jar PlayByPlayDriver $BASEDIR/input $BASEDIR/playoutput
+hadoop jar playbyplay.jar PlayByPlayDriver $BASEDIR/nfl_play_csv_files $BASEDIR/parsed_plays
 
-echo "Running Arrest Joiner MapReduce Job"
+echo "Running Arrest Joiner MapReduce Job to create playbyplay_arrests file"
 echo " "
-hadoop jar playbyplay.jar ArrestJoinDriver $BASEDIR/playoutput $BASEDIR/joinedoutput $BASEDIR/arrests.csv
+hadoop jar playbyplay.jar ArrestJoinDriver $BASEDIR/parsed_plays $BASEDIR/playbyplay_arrests $BASEDIR/arrests.csv
 
 echo "Creating Hive Tables"
 echo " "
-hive -S -f create_hive_tables.hql
+hive -S -f /sql/create_hive_tables.hql
 
-echo "Join Weather Data to PlayByPlay + Arrests"
+echo "Join Weather Data to playbyplay_arrests to create playbyplay_weather"
 echo " "
-hive -S -f weather_join.hql
+hive -S -f /sql/weather_join.hql
 
-echo "Sessionize drives (Play 3 of 9)"
+echo "Sessionize drives (Play 3 of 9) to create playbyplay_drives"
 echo " "
-hive -S -f sessionize_drives.hql
+hive -S -f /sql/sessionize_drives.hql
 
-echo "Calculate the result of the drive (drive ended with Punt)"
+echo "Calculate the result of the drive (drive ended with Punt).  This creates the final playbyplay table"
 echo " "
-hive -S -f result_of_drive.hql
+hive -S -f /sql/result_of_drive.hql
 
 echo "All done with NFL Demo data creation"
 echo ""
 echo ""
-echo "** Check the Hive and Pig output in queries.hql and queries.pig **"
+echo "** There are some sample SQL and PIG queries in queries.hql and queries.pig **"
