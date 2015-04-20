@@ -23,13 +23,13 @@ hadoop fs -put -f weather_csv_files $BASEDIR/
 hadoop fs -put -f stadium_csv_files $BASEDIR/
 hadoop fs -put -f arrest_csv_files  $BASEDIR/
 
-echo "Running PlaybyPlay Parser MapReduce Job to create the parsed_plays file"
+echo "Running PlaybyPlay Parser MapReduce Job to read the nfl_play_csv_files and create the parsed_plays output file"
 echo " "
 hadoop jar playbyplay.jar PlayByPlayDriver $BASEDIR/nfl_play_csv_files $BASEDIR/parsed_plays
 
 echo "Running Arrest Joiner MapReduce Job to create playbyplay_arrests file"
 echo " "
-hadoop jar playbyplay.jar ArrestJoinDriver $BASEDIR/parsed_plays $BASEDIR/playbyplay_arrests $BASEDIR/arrest_csv_files/arrests.csv
+hadoop jar playbyplay.jar ArrestJoinDriver $BASEDIR/parsed_plays $BASEDIR/playbyplay_arrests $BASEDIR/arrests.csv
 
 echo "Creating Hive Tables"
 echo " "
