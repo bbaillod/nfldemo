@@ -19,38 +19,45 @@ hadoop fs -rm -r $BASEDIR/stadium_csv_files
 
 echo "Putting Play, Weather, Stadium, and arrest files into HDFS"
 echo " "
-hadoop fs -put -f nfl_play_csv_files $BASEDIR/
-hadoop fs -put -f weather_csv_files $BASEDIR/
-hadoop fs -put -f stadium_csv_files $BASEDIR/
-hadoop fs -put -f arrest_csv_files  $BASEDIR/
-hadoop fs -put -f arrests.csv       $BASEDIR/
+hadoop fs -put -f nfl_play_csv_files            $BASEDIR/
+hadoop fs -put -f weather_csv_files             $BASEDIR/
+hadoop fs -put -f stadium_csv_files             $BASEDIR/
+hadoop fs -put -f arrest_csv_files              $BASEDIR/
+hadoop fs -put -f arrests.csv                   $BASEDIR/
+hadoop fs -put -f arrest_detail_csv_files       $BASEDIR/
 
+echo " "
 echo "Running PlaybyPlay Parser MapReduce Job to read the nfl_play_csv_files and create the parsed_plays output file"
 echo " "
 hadoop jar playbyplay.jar PlayByPlayDriver $BASEDIR/nfl_play_csv_files $BASEDIR/parsed_plays
 
+echo " "
 echo "Running Arrest Joiner MapReduce Job to create playbyplay_arrests file"
 echo " "
 hadoop jar playbyplay.jar ArrestJoinDriver $BASEDIR/parsed_plays $BASEDIR/playbyplay_arrests $BASEDIR/arrests.csv
 
-
+echo " "
 echo "Creating Hive Tables"
 echo " "
 cd sql
 hive -S -f create_hive_tables.hql
 
+echo " "
 echo "Join Weather Data to playbyplay_arrests to create playbyplay_weather"
 echo " "
 hive -S -f weather_join.hql
 
+echo " "
 echo "Sessionize drives to create playbyplay_drives i.e. play 3 of 9"
 echo " "
 hive -S -f sessionize_drives.hql
 
+echo " "
 echo "Calculate the result of the drive (drive ended with Punt).  This creates the final playbyplay table"
 echo " "
 hive -S -f result_of_drive.hql
 
+echo " "
 echo "All done with NFL Demo data creation"
 echo ""
 echo ""
