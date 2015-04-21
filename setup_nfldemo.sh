@@ -41,15 +41,15 @@ hive -S -f create_hive_tables.hql
 
 echo "Join Weather Data to playbyplay_arrests to create playbyplay_weather"
 echo " "
-hive -S -f ./sql/weather_join.hql
+hive -S -f weather_join.hql
 
 echo "Sessionize drives to create playbyplay_drives i.e. play 3 of 9"
 echo " "
-hive -S -f ./sql/sessionize_drives.hql
+hive -S -f sessionize_drives.hql
 
 echo "Calculate the result of the drive (drive ended with Punt).  This creates the final playbyplay table"
 echo " "
-hive -S -f ./sql/result_of_drive.hql
+hive -S -f result_of_drive.hql
 
 echo "All done with NFL Demo data creation"
 echo ""
